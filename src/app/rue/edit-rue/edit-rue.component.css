@@ -1,0 +1,14 @@
+.center-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh; 
+}
+
+.btn-edit {
+    background: #789461;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 10px;
+}

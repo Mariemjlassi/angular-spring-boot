@@ -1,0 +1,33 @@
+
+<div class="container">
+    <form [formGroup]="updatePForm" class="row g-3">
+        <h2>Mise à jour du profil du propriétaire</h2>
+    <div class="col-md-4">
+     <label for="nom" class="form-label">Nom</label>
+     <input type="text" class="form-control" name="nom" id="nom" formControlName="nom">
+    </div>
+    <div class="col-md-4">
+        <label for="prenom" class="form-label">Prenom</label>
+        <input type="text" class="form-control" name="prenom" id="prenom" formControlName="prenom">
+    </div>
+    <div class="col-md-4">
+        <label for="cin" class="form-label">CIN</label>
+        <input type="text" class="form-control" name="cin" id="cin" formControlName="cin">
+    </div>
+    <div class="col-g-12">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" id="email" formControlName="email">
+    </div>
+    <div class="col-md-4">
+        <label for="adresse" class="form-label">adresse</label>
+        <input type="text" class="form-control" name="adresse" id="adresse" formControlName="adresse">
+    </div>
+    <div class="col-md-4">
+        <label for="tel" class="form-label">Télephone</label>
+        <input type="tel" class="form-control" name="tel" id="tel" formControlName="tel">
+    </div>
+    <div class="col-12">
+    <button type="submit" (click)="updatePropById()" class="btn btn-edit">Enregistrer</button>
+    </div>
+</form>
+</div>

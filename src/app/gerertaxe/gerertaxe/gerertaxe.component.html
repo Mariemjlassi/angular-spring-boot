@@ -1,0 +1,123 @@
+
+      
+      
+    <div *ngIf="!affichage">
+      <div class="container">
+    <form class="row g-3">
+        <h3>Informations du propriétaire</h3>
+        <div class="col-md-4">
+          <label for="nomProprietaire" class="form-label">Nom</label>
+          <input type="text" class="form-control" id="nomProprietaire" [(ngModel)]="nomProprietaire" name="nomProprietaire">
+        </div>
+        <div class="col-md-4">
+          <label for="prenomProprietaire" class="form-label">Prénom</label>
+          <input type="text" class="form-control" id="prenomProprietaire" [(ngModel)]="prenomProprietaire" name="prenomProprietaire">
+        </div>
+        <div class="col-md-4">
+            <label for="cinProprietaire" class="form-label">Cin</label>
+            <input type="text" class="form-control" id="cinProprietaire" [(ngModel)]="cinProprietaire" name="cinProprietaire">
+          </div>
+        <div class="col-12">
+          <label for="emailProprietaire" class="form-label">Email</label>
+          <input type="text" class="form-control" id="emailProprietaire" placeholder="Email" [(ngModel)]="emailProprietaire" name="emailProprietaire" >
+        </div>
+        <div class="col-md-4">
+          <label for="adresseProprietaire" class="form-label">Adresse du propriétaire</label>
+          <input type="text" class="form-control" id="adresseProprietaire" [(ngModel)]="adresseProprietaire" name="adresseProprietaire">
+        </div>
+        <div class="col-md-4">
+          <label for="telProprietaire" class="form-label">Télephone</label>
+          <input type="text" class="form-control" id="telProprietaire" [(ngModel)]="telProprietaire" name="telProprietaire">
+        </div>
+        <hr>
+        <h3>Information du terrain</h3>
+        <div class="col-md-4">
+            <div>
+                <label for="arrondissement">Arrondissement</label>
+                <select id="arrondissement" name="arrondissement" [(ngModel)]="selectedArrondissement" (change)="onArrondissementChange()" class="form-select form-select-sm" aria-label="Small select example">
+                  <option *ngFor="let arrondissement of arrondissements" [ngValue]="arrondissement">{{ arrondissement.nom }}</option>
+                </select>
+              </div>
+              <div *ngIf="showZoneSelector">
+                <label for="zone">Zone:</label>
+                <select id="zone" name="zone" [(ngModel)]="selectedZone" (change)="onZoneChange()" class="form-select form-select-sm" aria-label="Small select example">
+                  <option *ngFor="let zone of zones" [ngValue]="zone">{{ zone.nom }}</option>
+                </select>
+              </div><br>
+              
+              <div *ngIf="showRueSelector">
+                <label for="rue">Rue:</label>
+                <select id="rue" name="rue" [(ngModel)]="selectedRue" class="form-select form-select-sm" aria-label="Small select example">
+                  <option *ngFor="let rue of rues" [ngValue]="rue">{{ rue.nom }}</option>
+                </select>
+              </div>
+        </div>
+        <div class="col-md-4">
+        <label for="surface" class="form-label">Entrer la Surface</label>
+         <input type="number" class="form-control" id="surface" [(ngModel)]="surface" name="surface" min="0" max="99999999" required>
+        </div>
+        <div class="col-md-4">
+            <label for="adresseTerrain" class="form-label">Adresse du terrain</label>
+            <input type="text" class="form-control" id="adresseTerrain" [(ngModel)]="adresseTerrain" name="adresseTerrain" > 
+        </div>
+
+        <div class="col-md-2">
+            <div>
+                <input type="radio" id="densite" [(ngModel)]="methodeCalcul" value="densite" name="densite">
+                <label for="densite">Densité Urbaine</label>
+              </div>
+              <div>
+                <input type="radio" id="valeurVenale" [(ngModel)]="methodeCalcul" value="valeurVenale" name="valeurVenale">
+                <label for="valeurVenale">Valeur Vénale</label>
+              </div>
+            </div>
+            
+            <div *ngIf="methodeCalcul === 'densite'"  class="col-3">
+              
+              <label for="densiteId" class="form-label">Prix de densité</label>
+             <select id="densiteId" class="form-select" [(ngModel)]="densiteId" name="densiteId">
+             <option *ngFor="let densite of densites" [ngValue]="densite.id">{{ densite.libelle }}</option>
+             </select>
+
+            </div>
+            
+            <div *ngIf="methodeCalcul === 'valeurVenale'" class="col-3">
+              <label for="valeurV" class="form-label">Entrer la Valeur Vénale:</label>
+              <input type="number" class="form-control" id="valeurV" [(ngModel)]="valeurVenale" name="valeurV">  
+        </div>
+        <div class="col-12">
+          <button (click)="calculerTaxe()" [disabled]="surface < 0" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+    </div>
+
+    <div *ngIf="affichage">
+      <div id="pdf">
+        <h2>Informations sur le Propriétaire</h2>
+        <div *ngIf="Result !== undefined">
+          <p>Résultat du Calcul de la Taxe: {{ Result }}</p>
+        </div>
+        <div>
+          <p>
+    Cher {{ proprietaireResult.nom }}, nous vous informons que vous avez une taxe en attente.
+    Veuillez régler cette taxe dès que possible pour éviter tout retard.
+    Voici vos informations :
+    <br>
+    - Nom: {{ proprietaireResult.nom }}
+    <br>
+    - Prénom: {{ proprietaireResult.prenom }}
+    <br>
+    - CIN: {{ proprietaireResult.cin }}
+    <br>
+    - Adresse: {{ proprietaireResult.adresse }}
+    <br>
+    - Email: {{ proprietaireResult.email }}
+  </p>
+        </div>
+        <p-button *ngIf="afficherBoutonTelecharger" severity="success" label="telecharger" [style]="{'margin-left': '800px'}" (click)="download(); afficherBoutonTelecharger = false" icon="pi pi-download"></p-button>
+      </div>
+    </div>
+    
+
+    

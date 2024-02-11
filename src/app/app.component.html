@@ -1,0 +1,41 @@
+<div *ngIf="ismenuVisble">
+  <nav class="navbar navbar-expand custom-text-color" style="background-color: #B0A695;">
+    <div class="container">
+      <a class="navbar-brand custom-t" routerLink="/home"><strong>Gérer les terrains non bâtis</strong></a>
+      <ul class="navbar-nav ml-auto">
+        <div >
+          <button class="btn btn-custom custom-text" (click)="logout()">sortir</button>
+        </div>
+        <li class="nav-item">
+          <a class="nav-link custom-text" routerLink="/gerertaxe">Gérer taxe locative</a>
+        </li>
+       
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle custom-text" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Données générales
+          </a>        
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item custom-text" routerLink="/arrondissement">Arrondissements</a></li>
+            
+            <li><a class="dropdown-item custom-text" routerLink="/zone">Zones</a></li>
+            
+            <li><a class="dropdown-item custom-text" routerLink="/rue">Rues</a></li>
+
+            <li><a class="dropdown-item custom-text" routerLink="/proprietaire">Propriétaires</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  </div>
+  <router-outlet></router-outlet>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

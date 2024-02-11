@@ -1,0 +1,16 @@
+.custom-text {
+    font-family:'Times New Roman', Times, serif;
+    font-size: 18px;
+    color: black; 
+}
+.custom-t{
+    font-family:'Times New Roman', Times, serif;
+    font-size: 24px;
+    color: black; 
+
+}
+.dropdown-item:hover {
+    background-color:#776B5D;
+    color: aliceblue;
+  }
+  
